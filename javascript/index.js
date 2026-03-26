@@ -130,7 +130,7 @@ async function makeBroccoli() {
 makeBroccoli();
 
 // Iteration 4 Display the image
-// línea 20, 35 y 60, con el método removeAttribute("hidden") para mostrar la imagen al final de cada receta
+// línea 50, 103 y 124, con el método removeAttribute("hidden") para mostrar la imagen al final de cada receta
 
 
 // Bonus 2 - Promise all
