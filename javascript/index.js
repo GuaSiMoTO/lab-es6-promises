@@ -46,7 +46,7 @@ getInstruction('mashedPotatoes', 0, (step0) => {
         // ultimo paso con la frase personalizada
         document.querySelector("#mashedPotatoes").innerHTML += `<li>Mashed potatoes are ready!</li>`;
         
-        // ultimo paso, borro el atributo hidden para mostrar la imagen
+        // iteration 4, borro el atributo hidden para mostrar la imagen
         document.querySelector("#mashedPotatoesImg").removeAttribute("hidden");
         }, (error) => console.log(error));
 
@@ -99,7 +99,7 @@ getInstruction('mashedPotatoes', 0, (step0) => {
     // muestro el ultimo paso personalizado
     document.querySelector("#steak").innerHTML += `<li>Steak is ready!</li>`;
 
-    // ultimo paso, borro el atributo hidden para mostrar la imagen
+    // iteration 4, borro el atributo hidden para mostrar la imagen
     document.querySelector("#steakImg").removeAttribute("hidden");
   })
   .catch(error => {
@@ -120,7 +120,7 @@ async function makeBroccoli() {
     // ultimo paso con la frase personalizada
     document.querySelector("#broccoli").innerHTML += `<li>Broccoli is ready!</li>`;
 
-    // ultimo paso, borro el atributo hidden para mostrar la imagen
+    // iteration 4, borro el atributo hidden para mostrar la imagen
     document.querySelector("#broccoliImg").removeAttribute("hidden");
   } catch(err) {
     console.error("Algo ha ido mal", err)
@@ -136,3 +136,31 @@ makeBroccoli();
 // Bonus 2 - Promise all
 // ...
 
+// creo un array de promesas para cada paso de la receta de Brussels sprouts
+// para no tener que hacer una por una como los casos anteriores
+const promises = [];
+
+// uso un for para meter todas las líenas dentro del array, así no tengo que escribir cada una como en los casos anteriores
+for (let i = 0; i < 8; i++) {
+  promises.push(obtainInstruction('brusselsSprouts', i));
+}
+
+// uso Promise.all para ejecutar todas las promesas y mostrar los pasos en orden
+Promise.all(promises)
+  .then((steps) => {
+
+    // uso forEach para iterar sobre el array de pasos y mostrarlos en el HTML
+    steps.forEach(step => {
+      document.querySelector("#brusselsSprouts").innerHTML += `<li>${step}</li>`;
+    });
+    
+    // último paso con la frase personalizada
+    document.querySelector("#brusselsSprouts").innerHTML += `<li>Brussels sprouts are ready!</li>`;
+
+    // borro el atributo hidden para mostrar la imagen
+    document.querySelector("#brusselsSproutsImg").removeAttribute("hidden");
+
+  })
+  .catch(error => {
+    console.error("Error: ", error);
+  });
